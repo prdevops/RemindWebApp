@@ -39,3 +39,11 @@ jobs:
     steps:
     - name: Print version
       run: echo "${{env.APPLICATION_NAME}} with version ${{env.DEPLOY_PACKAGE_NAME}}"
+
+  path:
+    needs: help  # Ensures that the result job runs after the build job
+    runs-on: ubuntu-latest
+    steps:
+    - name: List current folder
+      run: ls -lah
+
