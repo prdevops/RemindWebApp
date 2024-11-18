@@ -1,6 +1,3 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: .NET
 
 on:
@@ -11,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +24,8 @@ jobs:
       run: dotnet test --no-build --verbosity normal
 
   result:
+    needs: build  # Ensures that the result job runs after the build job
     runs-on: ubuntu-latest
     steps:
-    - name: print message
-    - run: echo "Congratulations, the build was successful"
+    - name: Print message
+      run: echo "Congratulations, the build was successful!"
