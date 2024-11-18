@@ -1,0 +1,29 @@
+﻿@model ChekoutViewModel
+
+@foreach (var item in Model.ProductsCheckout)
+{
+
+    <tr>
+        <td class="indecor-product-remove"><a class="removefromcard" data-id="@item.Id"><i class="fa fa-times"></i></a></td>
+        <td class="indecor-product-thumbnail" style="width:6rem!important"><a href="#"><img src="~/img/@item.Images?.FirstOrDefault().PathImage" alt=""></a></td>
+        <td class="indecor-product-name"><a href="#">@item.Name</a></td>
+        <td class="indecor-product-price"><span class="amount">@item.Price</span></td>
+        <td class="indecor-product-quantity">
+            <input value="1" type="number">
+        </td>
+        <td class="product-subtotal">
+
+            @{
+                if (item.DiscountProduct != 0)
+                {
+                    <span class="amount"> $@(item.Price - item.Price * item.DiscountProduct / 100) </span>
+
+                }
+                else
+                {
+                    <span class="amount">$@item.Price</span>
+                }
+            }
+        </td>
+    </tr>
+}

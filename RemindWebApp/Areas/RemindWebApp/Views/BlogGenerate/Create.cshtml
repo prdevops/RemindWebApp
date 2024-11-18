@@ -1,0 +1,42 @@
+﻿
+@model  Blog
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2 style="text-align:center">Create</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Title">Title</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Link">Link</label>
+                    <input asp-for="Link" class="form-control" />
+                    <span asp-validation-for="Link" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photo">Photo</label>
+                    <input asp-for="Photo" class="form-control" accept="image\*" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HeaderBig">HeaderBig</label>
+                    <input asp-for="HeaderBig" class="form-control" accept="image\*" />
+                    <span asp-validation-for="HeaderBig" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HeaderSmall">HeaderSmall</label>
+                    <input asp-for="HeaderSmall" class="form-control" accept="image\*" />
+                    <span asp-validation-for="HeaderSmall" class="text-danger"></span>
+                </div>      
+                <input type="submit" class="btn btn-primary" value="Create" />
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿@model AboutSlider
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Photo">Şəkil</label>
+                    <input asp-for="Photo" class="form-control" accept="image\*" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Create" />
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,40 @@
+﻿@model  HomeSliderBig
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Update</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <img src="~/img/@Model.ImgPath" style="width:300px" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title">Başlıq</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SubTitle">Altbaşlıq</label>
+                    <input asp-for="SubTitle" class="form-control" />
+                    <span asp-validation-for="SubTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Link">Haqqında</label>
+                    <input asp-for="Link" class="form-control" accept="image\*" />
+                    <span asp-validation-for="Link" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photo">Şəkil</label>
+                    <input asp-for="Photo" class="form-control" accept="image\*" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Create" />
+            </form>
+        </div>
+    </div>
+</div>

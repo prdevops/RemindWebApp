@@ -1,0 +1,37 @@
+﻿@model  AboutContent
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Update</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Slogan">Sloqan</label>
+                    <input asp-for="Slogan" class="form-control" />
+                    <span asp-validation-for="Slogan" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DescriptionFirst">Başlıq:1</label>
+                    <input asp-for="DescriptionFirst" class="form-control" />
+                    <span asp-validation-for="DescriptionFirst" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DescriptionSecond">Başlıq:2</label>
+                    <input asp-for="DescriptionSecond" class="form-control" accept="image\*" />
+                    <span asp-validation-for="DescriptionSecond" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DescriptionThird">Başlıq:3</label>
+                    <input asp-for="DescriptionThird" class="form-control" accept="image\*" />
+                    <span asp-validation-for="DescriptionThird" class="text-danger"></span>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Update" />
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,196 @@
+﻿@model OrderItemViewModel
+@{
+    ViewData["Title"] = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="page payment-page">
+    <section class="payment-form dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <form>
+                        <div class="col-md-12">
+                            <div class="form-row" style="background-color: #77777729 !important; padding: 0.5rem 0 0.5rem 0 !important;">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Name"></label>
+                                    <input asp-for="Name" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Surname"></label>
+                                    <input asp-for="Surname" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Country"></label>
+                                    <input asp-for="Country" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>  
+                                <div class="form-group col-md-6">
+                                    <label asp-for="City"></label>
+                                    <input asp-for="City" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="City" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Password"></label>
+                                    <input asp-for="Password" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Tel"></label>
+                                    <input asp-for="Tel" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="Tel" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Address"></label>
+                                    <input asp-for="Address" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <div class="accardion">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Header1 </h3>
+                                <span class="fas fa-minus"></span>
+                            </div>
+                            <div class="card-body active">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Error ab perferendis eum tempora, nobis voluptatibus aliquid voluptatem consequatur pariatur commodi,
+                                molestias atque.
+                                Reprehenderit velit consectetur sint. Itaque atque hic obcaecati!
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Header1 </h3>
+                                <span class="fas fa-plus"></span>
+                            </div>
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Error ab perferendis eum tempora, nobis voluptatibus aliquid voluptatem consequatur pariatur commodi,
+                                molestias atque.
+                                Reprehenderit velit consectetur sint. Itaque atque hic obcaecati!
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Header1 </span></h3>
+                                <span class="fas fa-plus"></span>
+                            </div>
+                            <div class="card-body">
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Error ab perferendis eum tempora, nobis voluptatibus aliquid voluptatem consequatur pariatur commodi,
+                                molestias atque.
+                                Reprehenderit velit consectetur sint. Itaque atque hic obcaecati!
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <form>
+                        <div class="products" style="background: #77777729 !important">
+                            @foreach (var item in Model.ProductsCheckout)
+                            {
+                                <div class="item">
+
+
+                                    @{
+                                        if (item.DiscountProduct != 0)
+                                        {
+                                            <span class="price"> $@(item.Price - item.Price * item.DiscountProduct / 100) </span>
+
+                                        }
+                                        else
+                                        {
+                                            <span class="price">$@item.Price</span>
+                                        }
+                                    }
+
+
+
+
+                                    <p class="item-name">@item.Name 1</p>
+                                    <p class="item-description">@item.Title</p>
+                                </div>
+                            }
+
+
+
+                            @{
+                                double total = 0;
+                                foreach (var item in Model.ProductsCheckout)
+                                {
+                                    double regprice = 0;
+
+                                    if (item.DiscountProduct != 0)
+                                    {
+                                        regprice = item.Price - item.Price * item.DiscountProduct / 100;
+
+                                    }
+                                    else
+                                    {
+                                        regprice = item.Price;
+                                    }
+
+                                    total += regprice;
+                                }
+                            }
+                            <div class="total">Total<span class="price">$@total</span></div>
+                        </div>
+                        <div class="card-details" style="background: #77777729 !important">
+                            <h3 class="title">Credit Card Details</h3>
+                            <div class="row">
+                                <div class="form-group col-sm-7">
+                                    <label for="card-holder">Card Holder</label>
+                                    <input id="card-holder" type="text" class="form-control" placeholder="Card Holder"
+                                           aria-label="Card Holder" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="form-group col-sm-5">
+                                    <label for="">Expiration Date</label>
+                                    <div class="input-group expiration-date">
+                                        <input type="text" class="form-control" placeholder="MM" aria-label="MM"
+                                               aria-describedby="basic-addon1">
+                                        <span class="date-separator">/</span>
+                                        <input type="text" class="form-control" placeholder="YY" aria-label="YY"
+                                               aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label for="card-number">Card Number</label>
+                                    <input id="card-number" type="text" class="form-control" placeholder="Card Number"
+                                           aria-label="Card Holder" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="cvc">CVC</label>
+                                    <input id="cvc" type="text" class="form-control" placeholder="CVC" aria-label="Card Holder"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                                <div class="form-group col-sm-12">
+                                    <button type="button" class="btn btn-primary btn-block">Proceed</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+
+

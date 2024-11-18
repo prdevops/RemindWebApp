@@ -1,0 +1,56 @@
+#prs_slider{
+	margin: 0;
+	padding: 0;
+	
+}
+div{
+	box-sizing: border-box;
+
+}
+.big{
+	position: relative;
+	width: 600px;
+	height: 400px;
+
+}
+.abc{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#fish-img{
+	width: 190px;
+	height: 140px;
+  margin: 10px 5px ;
+	cursor: zoom-in;
+}
+.fish-img-box{
+	width: 600px;
+	min-height: 550px;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 100px auto;
+}
+.zoom{
+	width: 500px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 60px;
+	margin:  0 auto;
+}
+.zoom input{
+	color: lightblue;
+	background: transparent;
+	outline: none;
+	margin: 15px 15px;
+	font-size: 20px;
+	border: 2px solid lightblue;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px ;
+	height: 40px;
+}

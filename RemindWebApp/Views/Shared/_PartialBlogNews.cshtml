@@ -1,0 +1,19 @@
+﻿@model  BlogNewsViewModel
+
+
+@foreach (var news in Model.BlogNewses)
+{
+    <!-- blognews -->
+    <div class="post post-row">
+        <a class="post-img"><img src="~/img/@news.ImagePath" alt=""></a>
+        <div class="post-body">
+            <h3 class="post-title"><a href="#">@news.Title</a></h3>
+            <ul class="post-meta">
+                <li><a href="author.html">@news.By</a></li>
+                <li>@news.CreatedDate</li>
+            </ul>
+            <p>@news.Content</p>
+        </div>
+    </div>
+    <!-- /blognews -->
+}

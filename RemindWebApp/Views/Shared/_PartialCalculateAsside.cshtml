@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Product>
+@{
+    double total = 0;
+    foreach (var item in Model)
+    {
+        double regprice = 0;
+
+        if (item.DiscountProduct != 0)
+        {
+            regprice = item.Price - item.Price * item.DiscountProduct / 100;
+
+        }
+        else
+        {
+            regprice = item.Price;
+        }
+
+        total += regprice;
+    }
+}
+<h3>@total</h3>

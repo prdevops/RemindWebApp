@@ -1,0 +1,26 @@
+﻿@model  Team
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 d-flex justify-content:center ">
+            <div class="card" style="width: 30rem;">
+                <img class="card-img-top" src="~/img/@Model.ImagePath" alt="Card image cap">
+                <div class="card-body">
+
+                    <h4>Name is: @Model.Name</h4>
+                    <h4>Jobs is: @Model.Job</h4>
+                   <p>@Model.About</p>
+                    <a asp-action="Index" class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Go Back </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

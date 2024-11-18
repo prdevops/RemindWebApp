@@ -1,0 +1,74 @@
+﻿@model ChekoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="wrapper wrapper-box">
+
+    <!--Shopping Cart Area Strat-->
+    <div class="Shopping-cart-area pb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="#">
+                        <div class="table-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="indecor-product-remove">remove</th>
+                                        <th class="indecor-product-thumbnail">images</th>
+                                        <th class="cart-product-name">Product</th>
+                                        <th class="indecor-product-price">Unit Price</th>
+                                        <th class="indecor-product-quantity">Quantity</th>
+                                        <th class="indecor-product-subtotal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cardtable">
+                                   <partial name="_PartialCard" />
+                                </tbody>
+                            </table>
+                        </div>
+       
+                        <div class="row">
+                            <div class="col-md-5 ml-auto">
+                                <div class="cart-page-total">
+                                    <h2>Cart totals</h2>
+                                    <ul>
+                                        
+                                        @{
+                                            double total = 0;
+                                            foreach (var item in Model.ProductsCheckout)
+                                            {
+                                                double regprice = 0;
+
+                                                if (item.DiscountProduct != 0)
+                                                {
+                                                    regprice = item.Price - item.Price * item.DiscountProduct / 100;
+
+                                                }
+                                                else
+                                                {
+                                                    regprice = item.Price;
+                                                }
+
+                                                total += regprice;
+                                            }
+                                        }
+                                        
+                                        <li>Subtotal <span>$@total</span></li>
+                                        <li>Total <span>$@total</span></li>
+                                    </ul>
+                                    <a asp-controller="OrderItem" asp-action="Payment"> Proceed to checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

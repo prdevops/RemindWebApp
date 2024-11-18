@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Product>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-6 pb-3">
+            <img src="~/img/@item.Images.FirstOrDefault().PathImage">
+        </div>
+
+        <div class="col-md-6">
+
+            <span class="pr_name">@item.Name</span>
+
+            @{
+                if (item.DiscountProduct != 0)
+                {
+
+                    <del>
+                        <span class="now-price"> $@item.Price</span>
+                    </del>
+                    <span class="regular-price">$@(item.Price - item.Price * item.DiscountProduct / 100)</span>
+                }
+                else
+                {
+                    <span class="regular-price">@item.Price</span>
+                }
+            }
+            <a href="#" data-id="@item.Id" class="garbage_card assideremovecookie assidetotal"><i class="far fa-trash-alt"></i></a>
+
+        </div>
+    </div>
+}
+

@@ -1,0 +1,51 @@
+﻿@model  BlogNewsViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <section id="blognews">
+        <!-- SECTION -->
+        <div class="section">
+            <!-- container -->
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-8 showmore">
+                        <partial name="_PartialBlogNews" />
+                    </div>
+                    <div class="col-md-4">
+                        <!-- galery widget -->
+                        <div class="aside-widget">
+                            <div class="section-title">
+                                <h2 class="title">Instagram</h2>
+                            </div>
+                            <div class="galery-widget">
+                                <ul>
+                                    <li><a href="#"><img src="~/img/blog_galery/galery-1.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="~/img/blog_galery/galery-2.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="~/img/blog_galery/galery-3.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="~/img/blog_galery/galery-4.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="~/img/blog_galery/galery-5.jpg" alt=""></a></li>
+                                    <li><a href="#"><img src="~/img/blog_galery/galery-6.jpg" alt=""></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="aside-widget text-center">
+                            <a href="#" style="display: inline-block;margin: auto;">
+                                <img class="img-responsive" src="~/img/@Model.Advertisments.ElementAt(0).ImagePath" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row  text-center d-flex justify-content-center"> 
+                    <button id="loadmore" class="btn btn-primary mx-auto">Load More</button>
+                    <input type="hidden" id="countblognews" value=" @ViewBag.BlogNewsCount"/>
+                </div>
+
+               
+            </div>
+        </div>
+    </section>
+</main>
+

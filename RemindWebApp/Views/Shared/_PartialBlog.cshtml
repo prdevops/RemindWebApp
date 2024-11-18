@@ -1,0 +1,17 @@
+﻿@model BlogViewModel
+
+
+@foreach (var blog in Model.BlogsCenter)
+{
+    <div class="col-md-4">
+        <div class="post post-sm">
+            <a class="post-img" href="@blog.Link"><img src="Img/@blog.ImagePath" alt=""></a>
+            <div class="post-body">
+                <h3 class="post-title title-sm"><a href="@blog.Link">@blog.Title.</a></h3>
+                <ul class="post-meta">
+                    <li>@blog.CreatedDate</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}

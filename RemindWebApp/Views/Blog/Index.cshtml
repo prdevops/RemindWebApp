@@ -1,0 +1,131 @@
+﻿@model BlogViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="blog">
+
+
+    <!-- SECTION -->
+    <div class="section pt-0">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div id="hot-post" class="row hot-post">
+                <div class="col-md-8 hot-post-left">
+                    <!-- post -->
+                    <div class="post post-thumb">
+                        <a class="post-img" href="@Model.BlogSingleHeader.Link"><img src="Img/@Model.BlogSingleHeader.ImagePath" alt=""></a>
+                        <div class="post-body">
+                            <h3 class="post-title title-lg"><a href="@Model.BlogSingleHeader.Link">Postea senserit id eos, vivendo periculis ei qui</a></h3>
+                            <ul class="post-meta">
+
+                                <li>@Model.BlogSingleHeader.CreatedDate</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /post -->
+                </div>
+                <div class="col-md-4 hot-post-right">
+                    <!-- post -->
+                    @foreach (var asside in Model.BlogsHeader)
+                    {
+                        <div class="post post-thumb">
+                            <a class="post-img" href="@asside.Link"><img src="Img/@asside.ImagePath" alt=""></a>
+                            <div class="post-body">
+                                <h3 class="post-title"><a href="@asside.Link">@asside.Title</a></h3>
+                                <ul class="post-meta">
+
+                                    <li>@asside.CreatedDate</li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="section">
+            <div class="container">
+                <!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- row -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="section-title">
+                                    <h2 class="title">Gözlənilən Məhsullar</h2>
+                                </div>
+                            </div>
+
+                            @foreach (var blogfour in Model.Blogs)
+                            {
+                                <div class="col-md-6">
+                                    <div class="post">
+                                        <a class="post-img" href="@blogfour.Link"><img src="Img/@blogfour.ImagePath" alt=""></a>
+                                        <div class="post-body">
+
+                                            <h3 class="post-title"><a href="blog-post.html">@blogfour.Title</a></h3>
+                                            <ul class="post-meta">
+
+                                                <li>@blogfour.CreatedDate</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+
+
+                        </div>
+
+                        <div class="row hold">
+                            <div class="col-md-12">
+                                <div class="section-title">
+                                    <h2 class="title"></h2>
+                                </div>
+                            </div>
+                            <partial name="_PartialBlog"/>
+                           
+                         
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row  text-center d-flex justify-content-center">
+            <button id="loadblog" class="btn btn-primary mx-auto">Load More</button>
+            <input type="hidden" id="blogcount" value=" @ViewBag.BlogCount" />
+        </div>
+        <div class="section">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-12 section-row text-center">
+                        <a href="#" style="display: inline-block;margin: auto;">
+                            <img class="img-responsive" src="~/img/@Model.Advertisments.ElementAt(1).ImagePath" alt="">
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+</section>

@@ -1,0 +1,162 @@
+﻿    @model AboutViewModel
+
+@{
+    ViewData["Title"] = "About";
+
+}
+
+
+@section flexslider{
+    <link href="~/css/flexslider.css" rel="stylesheet" />
+}
+
+<main>
+    <setion id="holdthis">
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="flexslider">
+                        <ul class="slides">
+                            @foreach (var item in Model.AboutSliders)
+                            {
+                                <li data-thumb="img/@item.ImagePath">
+                                    <img src="~/img/@item.ImagePath"/>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-12">
+                    <!--About Us Content Start-->
+                    <div class="first_content">
+                        <h2>Our company</h2>
+                        <p class="mb-20">
+                            @Model.AboutContents.FirstOrDefault().Title
+                        </p>
+                        <p class="mb-20">
+                            @Model.AboutContents.FirstOrDefault().DescriptionFirst
+                        </p>
+                        <p>
+                            @Model.AboutContents.FirstOrDefault().DescriptionThird
+                        </p>
+                    </div>
+                    <!--About Us Content End-->
+                </div>
+            </div>
+        </div>
+
+
+
+    </setion>
+    <div class="about_part">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row mt-5">
+                <div class="col-md-5">
+                    <div class="about">
+                        <div class="about_part-title">
+                            <h2 class="title">Our story</h2>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, mea ad idque detraxit, cu soleat graecis invenire eam. Vidisse suscipit liberavisse has ex, vocibus patrioque vim et, sed ex tation reprehendunt. Mollis volumus no vix, ut qui clita habemus, ipsum senserit est et. Ut has soluta epicurei mediocrem, nibh nostrum his cu, sea clita electram reformidans an.</p>
+                        <blockquote class="blockquote">
+                            <p>Ei prima graecis consulatu vix, per cu corpora qualisque voluptaria. Bonorum moderatius in per, ius cu albucius voluptatum. Ne ius torquatos dissentiunt. Brute illum utroque eu quo. Cu tota mediocritatem vis, aliquip cotidieque eu ius, cu lorem suscipit eleifend sit.</p>
+                            <footer class="blockquote-footer">John Doe</footer>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="about_part-row">
+                        <div class="about_part-title">
+                            <h2 class="title">Our Vision</h2>
+                        </div>
+                        <p>Est in saepe accusam luptatum. Purto deleniti philosophia eum ea, impetus copiosae id mel. Vis at ignota delenit democritum, te summo tamquam delicata pro. Utinam concludaturque et vim, mei ullum intellegam ei. Eam te illum nostrud, suas sonet corrumpit ea per. Ut sea regione posidonium. Pertinax gubergren ne qui, eos an harum mundi quaestio.</p>
+                        <p>Nihil persius id est, iisque tincidunt abhorreant no duo. Eripuit placerat mnesarchum ius at, ei pro laoreet invenire persecuti, per magna tibique scriptorem an. Aeque oportere incorrupte ius ea, utroque erroribus mel in, posse dolore nam in. Per veniam vulputate intellegam et, id usu case reprimique, ne aperiam scaevola sed. Veritus omnesque qui ad. In mei admodum maiorum iracundia, no omnis melius eum, ei erat vivendo his. In pri nonumes suscipit.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+
+
+    <section id="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 team">
+                    <h2>Are You know our Team? </h2>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consecte adipiscing elit.
+                        Suspendisse condimentum porttitor cursumus.
+
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="card-deck  owl-carousel">
+                        @foreach (var team in Model.Teams)
+                        {
+                            <div class="card">
+                                <img src="~/img/@team.ImagePath" class="card-img-top" alt="...">
+                                <div class="card-body text-center card_some">
+                                    <h5 class="card-title">@team.Name</h5>
+                                    <p class="card-text"><small class="text-muted">@team.Job</small></p>
+                                    <p class="card-text">
+                                        @team.About
+                                    </p>
+                                    <div class="smile">
+                                        <a class="btn btn-xs btn-slide btn-light">
+                                            <i class="fab fa-facebook-f"></i>
+                                            <span>facebook</span>
+                                        </a>
+
+                                        <a class="btn btn-xs btn-slide btn-light">
+                                            <i class="fab fa-twitter"></i>
+                                            <span> twitter</span>
+                                        </a>
+                                        <a class="btn btn-xs btn-slide btn-light">
+                                            <i class="fab fa-instagram"></i>
+                                            <span> instagram</span>
+                                        </a>
+                                        <a class="btn btn-xs btn-slide btn-light">
+                                            <i class="far fa-envelope"></i>
+                                            <span>mail</span>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+@section flexjs{
+    <script src="~/js/jquery.flexslider-min.js"></script>
+    <script src="~/js/flexminijs.js"></script>
+}
+
+
+
+@section sliderowl {
+    <script>
+        $(document).ready(function () {
+            $(".owl-carousel").owlCarousel();
+        });
+    </script>
+}

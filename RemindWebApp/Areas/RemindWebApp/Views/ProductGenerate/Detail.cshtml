@@ -1,0 +1,49 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center">
+                @foreach (var item in Model.Images)
+                {
+
+                    <div class="col-md-3  mb-3">
+                        <img src="~/img/@item.PathImage" alt="..." class="img-thumbnail">
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 d-flex justify-content:center ">
+                <div class="card" style="width: 30rem;">
+
+                    <h4>Name is: @Model.Name</h4>
+                    <h5>Category is: @Model.CategoryMarka.Category.Name</h5>
+                    <h5>Marka is: @Model.CategoryMarka.Marka.Name</h5>
+                    <h5>Title is: @Model.Title</h5>
+                    <p>Description is: @Model.Description</p>
+                    <p>Price is: @Model.Price</p>
+                    <p>Count is: @Model.Count</p>
+                    <p>Discount is: @Model.DiscountProduct</p>
+                    <p>Dedline is: @Model.ProductDedline</p>
+                    <p>Like Count is : @Model.MostView</p>
+                    <P> Seller Count is: @Model.SellerCount</P>
+                    <a asp-action="Index" class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Go Back </a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+

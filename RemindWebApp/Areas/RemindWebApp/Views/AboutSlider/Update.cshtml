@@ -1,0 +1,25 @@
+﻿@model  AboutSlider
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Update</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <img src="~/img/@Model.ImagePath" style="width:300px" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ChangePhoto">Şəkil</label>
+                    <input asp-for="ChangePhoto" class="form-control" accept="image\*" />
+                    <span asp-validation-for="ChangePhoto" class="text-danger"></span>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Update" />
+            </form>
+        </div>
+    </div>
+</div>

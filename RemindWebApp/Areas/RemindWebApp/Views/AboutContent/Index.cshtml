@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AboutContent>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                   
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            
+                            <th scope="col">İdarəetmə</th>
+                            <th scope="col">Başlıq:1</th>
+                            <th scope="col">Başlıq:2</th>
+                            <th scope="col">Başlıq:3</th>
+                            <th scope="col">Sloqan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      
+                        @foreach (var content in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    <a asp-action="Detail" asp-route-id="@content.Id" class="btn btn-success"><i class="fas fa-eye"></i></a>
+                                    <a asp-action="Update" asp-route-id="@content.Id" class="btn btn-warning" style="margin-top:10px"> <i class="far fa-edit"></i></a>
+                                </td>
+                                <td>@content.DescriptionFirst</td>
+                                <td>@content.DescriptionSecond</td>
+                                <td>@content.DescriptionThird</td>
+                                <td>@content.Slogan</td>
+                            </tr>
+                          
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

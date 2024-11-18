@@ -1,0 +1,36 @@
+﻿@model Team
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="Name">Ad</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Job">Vəzifə</label>
+                    <input asp-for="Job" class="form-control" />
+                    <span asp-validation-for="Job" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="About">Haqqında</label>
+                    <input asp-for="About" class="form-control" accept="image\*" />
+                    <span asp-validation-for="About" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Photo">Şəkil</label>
+                    <input asp-for="Photo" class="form-control" accept="image\*" />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Create" />
+            </form>
+        </div>
+    </div>
+</div>
+

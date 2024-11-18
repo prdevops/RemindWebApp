@@ -1,0 +1,508 @@
+﻿@model RemindViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <main>
+        <section id="sliderCarousel">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-12">
+                        <div class="hero-slider" data-carousel>
+                            @foreach (var item in Model.HomeSliderBigs)
+                            {
+                                <div class="carousel-cell"
+                                     style="background-image:url('img/@item.ImgPath')">
+                                    <div class="overlay"></div>
+                                    <div class="slide-content">
+                                        <div class="mask">
+                                            <h2 class="title">@item.Title</h2>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="mask">
+                                            <p class="caption">@item.SubTitle</p>
+                                            <a href="@item.Link" target="_blank" class="btn">
+                                               Daha Ətraflı
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Slider => https://codepen.io/dedevillela/pen/qdaVvd -->
+
+        <section id="men">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="row mt-4">
+                        <div class="row mx-4 my-4 product-item-2 align-items-start">
+                            <div class="col-md-6 mb-5 mb-md-0">
+                                <img src="~/img/content/model_1.jpg" alt="Image" class="img-fluid">
+                            </div>
+
+                            <div class="col-md-6 ml-auto ">
+
+                                <h3 class=" mb-4 font-weight-bold">About This Product</h3>
+                                <p class="first_p">
+                                    Et tempora id nostrum saepe amet doloribus deserunt totam officiis
+                                    cupiditate asperiores quasi accusantium voluptatum dolorem quae sapiente voluptatem
+                                    ratione odio iure blanditiis earum fuga molestiae alias dicta perferendis inventore!
+                                </p>
+                                <p class="second_p">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus
+                                    soluta assumenda sed optio, error at?
+                                </p>
+
+                                <div class="mb-4">
+                                    <h3 class="price_text">Price:</h3>
+                                    <div class="price"><del class="mr-2">$269.00</del> <span>$69.00</span> </div>
+                                </div>
+                                <div class="btn_sel">
+                                    <a href="#" class="btn_first  btn  d-block mb-2 mb-lg-0 d-lg-inline-block">
+                                        Details
+                                    </a>
+                                    <a href="#" class=" btn_second btn  d-block d-lg-inline-block">Add To Cart</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Product Area Start-->
+        <div class="product-area pt-20 pb-35">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!--Section Title 2 Start-->
+                        <div class="section-title2">
+                            <h2>Our Products</h2>
+                            <!--Product Tab Menu Start-->
+                            <div class="product-tab-menu">
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        <li><a class="navbar-link @category.Active" data-toggle="tab" aria-selected="true" href="#tab-@category.Id">@category.Name</a></li>
+                                    }
+
+                                </ul>
+                            </div>
+                            <!--Product Tab Menu End-->
+                        </div>
+                        <!--Section Title 2 End-->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tab-content" id="myTabContent">
+                            @foreach (var item in Model.CategoryByProducts)
+                            {
+                                <div class="tab-pane fade show @item.Key.Active" id="tab-@item.Key.Id" role="tabpanel">
+                                    <div class="row">
+                                        <div class="product-slider owl-carousel">
+                                            @{
+                                                var length = (item.Value.Count() % 2 == 0 ? item.Value.Count() / 2 : item.Value.Count() / 2 + 1);
+                                            }
+
+                                            @for (int i = 0, j = 0; i < length; i++, j += 2)
+                                            {
+                                                <div class="col-md-12">
+                                                    @foreach (var mults in item.Value.Skip(j).Take(2))
+                                                    {
+                                                        <!--Single Product Area Start-->
+                                                        <div class="single-product-area mb-40">
+                                                            <div class="product-img img-full">
+                                                                <a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@mults.Id" asp-route-catid="@mults.CategoryMarka.Category.Id">
+                                                                    <img class="first-img" src="~/img/@mults.Images.FirstOrDefault()?.PathImage" alt="">
+                                                                </a>
+                                                                <span class="sticker">New</span>
+                                                                <div class="product-action">
+                                                                    <ul>
+                                                                        <li><a  class="addcard" title="Add To Cart" data-id="@mults.Id"><span class="icon_bag_alt"></span></a></li>
+
+                                                                        @if (User.Identity.IsAuthenticated)
+                                                                        {
+                                                                            <li><a class="temp" data-id="@mults.Id"><span class=" icon_heart_alt" title="Add To Like"></span></a></li>
+
+                                                                        }
+
+
+                                                                    
+
+                                                                    </ul>
+                                                                </div>
+                                                                <ul class="product-quickview">
+                                                                    <li><a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@mults.Id" asp-route-catid="@mults.CategoryMarka.Category.Id" title="Quick View"><span class="icon_search"></span></a></li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="product-content">
+                                                                <h4><a href="single-product.html">@mults.Name</a></h4>
+                                                                <div class="product-price">
+                                                                    @{
+                                                                        if (mults.DiscountProduct != 0)
+                                                                        {
+                                                                            <span class="now-price"> $@(mults.Price - mults.Price * mults.DiscountProduct / 100) </span>
+                                                                            <span class="regular-price"> $@mults.Price </span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span class="now-price">$@mults.Price</span>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--Single Product Area End-->
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Product Area End-->
+        <!--Deal Product Area Start-->
+        <div class="deal-product-area deal-bg">
+            <div class="deal-produt-slider owl-carousel">
+                @foreach (var sponsor in Model.Products.Where(x => x.CategoryMarkaId == 19).Take(3))
+                {
+                    <!--Single Deal Product Start-->
+                    <div class="single-deal-product">
+                        <div class="deal-product-img img-full">
+                            <a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@sponsor.Id" asp-route-catid="@sponsor.CategoryMarka.Category.Id"><img src="~/img/@sponsor.Images.FirstOrDefault().PathImage" alt=""></a>
+                          
+                            <span class="descount-sticker">-@sponsor.DiscountProduct%</span>
+                        </div>
+                        <div class="deal-product-content">
+                            <div class="section-title">
+                                <span class="sub-title">Our Collections</span>
+                            </div>
+                            <h3><a href="single-product.html">@sponsor.Title</a></h3>
+                            <p class="product-description">@sponsor.Description</p>
+                            <div class="product-price deal-price">
+                                <span class="now-price">$@(sponsor.Price - sponsor.Price * sponsor.DiscountProduct / 100) </span>
+                                <span class="regular-price">$@sponsor.Price</span>
+                            </div>
+                            <div class="product-countdown">
+                                <div class="pro-countdown" data-countdown="@sponsor.ProductDedline"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Single Deal Product End-->
+                }
+
+            </div>
+        </div>
+        <!--Deal Product Area End-->
+        <!--List Product Area Start-->
+        <div class="list-product-area pt-80 pb-30">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <!--List Product Section Title Start-->
+                                <div class="list-product-section-title mb-30">
+                                    <h2>Yeni Məhsullar</h2>
+                                </div>
+                                <!--List Product Section Title End-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="list-product-slider owl-carousel">
+                                    @{
+                                        int count = 0;
+
+                                        @for (int i = 0; i < 3; i++)
+                                        {
+                                            <div class="list-slider-group">
+
+
+                                                @foreach (var product in Model.Products.Skip(count).Take(3))
+                                                {
+                                                    if (DateTime.Now.Date > product.CreatedDate.AddDays(5).Date)
+                                                    {
+
+                                                        <!--Single Lis t Product Start-->
+                                                        <div class="single-list-product mb-50">
+                                                            <div class="product-img img-full">
+                                                                <a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@product.Id" asp-route-catid="@product.CategoryMarka.Category.Id"><img src="~/img/@product.Images.FirstOrDefault().PathImage" alt=""></a>
+                                                            </div>
+                                                            <div class="product-content">
+                                                                <h4><a href="single-product.html">@product.Name</a></h4>
+                                                                <div class="product-price">
+
+                                                                    @{
+                                                                        if (product.DiscountProduct != 0)
+                                                                        {
+                                                                            <span class="now-price"> $@(product.Price - product.Price * product.DiscountProduct / 100) </span>
+
+                                                                            <span class="regular-price"> $@product.Price </span>
+
+
+                                                                        }
+                                                                        else
+                                                                        {
+
+                                                                            <span class="now-price">$@product.Price</span>
+
+
+                                                                        }
+
+                                                                    }
+
+                                                                </div>
+                                                                <a class="add-cart-btn addcard" data-id="@product.Id">Add To Cart</a>
+                                                            </div>
+                                                        </div>
+                                                        <!--Single List Product End-->
+                                                        count = count + 3;
+                                                    }
+
+                                                }
+
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <!--List Product Section Title Start-->
+                                <div class="list-product-section-title mb-30">
+                                    <h2>Stış Recordu</h2>
+                                </div>
+                                <!--List Product Section Title End-->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="list-product-slider owl-carousel">
+                                    @{
+                                        count = 0;
+
+                                        @for (int i = 0; i < 3; i++)
+                                        {
+                                            <div class="list-slider-group">
+
+                                                @foreach (var product in Model.Products.OrderByDescending(x => x.SellerCount).Skip(count).Take(3))
+                                                {
+                                                    <!--Single Lis t Product Start-->
+                                                    <div class="single-list-product mb-50">
+                                                        <div class="product-img img-full">
+                                                            <a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@product.Id" asp-route-catid="@product.CategoryMarka.Category.Id"><img src="~/img/@product.Images.FirstOrDefault().PathImage" alt=""></a>
+                                                        </div>
+                                                        <div class="product-content">
+                                                            <h4><a href="single-product.html">@product.Name</a></h4>
+                                                            <div class="product-price">
+
+                                                                @{
+                                                                    if (product.DiscountProduct != 0)
+                                                                    {
+                                                                        <span class="now-price"> $@(product.Price - product.Price * product.DiscountProduct / 100) </span>
+
+                                                                        <span class="regular-price"> $@product.Price </span>
+
+
+                                                                    }
+                                                                    else
+                                                                    {
+
+                                                                        <span class="now-price">$@product.Price</span>
+
+
+                                                                    }
+
+                                                                }
+
+                                                            </div>
+                                                            <a class="add-cart-btn addcard" data-id="@product.Id">Add To Cart</a>
+                                                        </div>
+                                                    </div>
+                                                    <!--Single List Product End-->
+                                                }
+                                                @{
+                                                    count = count + 3;
+                                                }
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12">
+                        <div class="row">
+                            <div class="col-12">
+                                <!--List Product Section Title Start-->
+                                <div class="list-product-section-title mb-30">
+                                    <h2>Bəyənilənlər</h2>
+                                </div>
+                                <!--List Product Section Title End-->
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="list-product-slider owl-carousel">
+
+                                    @{
+                                        count = 0;
+
+                                        @for (int i = 0; i < 3; i++)
+                                        {
+                                            <div class="list-slider-group">
+
+                                                @foreach (var product in Model.Products.OrderByDescending(x => x.MostView >= 10).Skip(count).Take(3))
+                                                {
+                                                    <!--Single Lis t Product Start-->
+                                                    <div class="single-list-product mb-50">
+                                                        <div class="product-img img-full">
+                                                            <a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@product.Id" asp-route-catid="@product.CategoryMarka.Category.Id"><img src="~/img/@product.Images.FirstOrDefault().PathImage" alt=""></a>
+                                                        </div>
+                                                        <div class="product-content">
+                                                            <h4><a href="single-product.html">@product.Name</a></h4>
+                                                            <div class="product-price">
+
+                                                                @{
+                                                                    if (product.DiscountProduct != 0)
+                                                                    {
+                                                                        <span class="now-price"> $@(product.Price - product.Price * product.DiscountProduct / 100) </span>
+
+                                                                        <span class="regular-price"> $@product.Price </span>
+
+
+                                                                    }
+                                                                    else
+                                                                    {
+
+                                                                        <span class="now-price">$@product.Price</span>
+
+
+                                                                    }
+
+                                                                }
+
+                                                            </div>
+                                                            <a class="add-cart-btn addcard" data-id="@product.Id">Add To Cart</a>
+                                                        </div>
+                                                    </div>
+                                                    <!--Single List Product End-->
+                                                }
+                                                @{
+                                                    count = count + 3;
+                                                }
+                                            </div>
+
+                                        }
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--List Product Area End-->
+        @*<section id="modal_slider">
+            <div class="main">
+                <div class="container">
+                    <div class="row mt-5">
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <img src="~/img/advertising_modal/sm/1.jpg" alt="" data-index="0" data-img="1.jpg"
+                                data-msg="Nature and sunrise">
+                           </a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <img src="~/img/advertising_modal/sm/2.jpg" alt="" data-index="1" data-img="2.jpg" data-msg="Snow">
+                            </a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <img src="~/img/sm/3.jpg" alt="" data-index="2" data-img="3.jpg"
+                                     data-msg="Mountains and fjords">
+                            </a>
+                        </div>
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <img src="~/img/sm/4.jpg" alt="" data-index="3" data-img="4.jpg"
+                                     data-msg="Northern Lights">
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal_area">
+                <div class="cover"></div>
+                <div class="modal_core">
+                    <img src="~/img/lg/1.jpg">
+                    <p>Nature and sunrise</p>
+                    <span class="direction" id="right_i">
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                    <span class="direction" id="left_i">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <div class="navigation">
+                        <div class="item" data-img="1.jpg" data-msg="Nature and sunrise">
+                            <img src="~/img/sm/1.jpg">
+                            <div class="cover_item"></div>
+                        </div>
+                        <div class="item" data-img="2.jpg" data-msg="Snow">
+                            <img src="~/img/sm/2.jpg">
+                            <div class="cover_item"></div>
+                        </div>
+                        <div class="item" data-img="3.jpg" data-msg="Mountains and fjords">
+                            <img src="~/img/sm/3.jpg">
+                            <div class="cover_item"></div>
+                        </div>
+                        <div class="item" data-img="4.jpg" data-msg="Northern Lights">
+                            <img src="~/img/sm/4.jpg">
+                            <div class="cover_item"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    </main>
+@section flickity{
+    <!-- Home First HerSlider Slider -->
+    <script src="js/herosl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.1.0/flickity.pkgd.min.js"></script>
+    <!-- Home First Slider -->
+}

@@ -1,0 +1,177 @@
+﻿@model RemindViewModel
+@{
+    ViewData["Title"] = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <section class="category_product_area mt-5 ">
+
+        <div class="container">
+            <div class="row flex-row-reverse">
+                <div class="col-lg-12">
+                    <div class="product_top_bar">
+                        <div class="left_dorp mb-5">
+                            <select class="sorting category">
+
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <option value="@category.Id">@category.Name</option>
+                                }
+
+
+                            </select>
+                            <select class="sorting marka">
+
+                                @foreach (var item in Model.Markas)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+
+
+                            </select>
+
+
+                            @*<select class="show">
+                                    <option value="1"><a asp-action="Index" asp-route-showme="8">Show me 8</a></option>
+                                    <option value="1"><a asp-action="Index" asp-route-showme="8">Show me 8</a></option>
+                                    <option value="1"><a asp-action="Index" asp-route-showme="12">Show me 12</a></option>
+                                    <option value="1"><a asp-action="Index" asp-route-showme="16">Show me 16</a></option>
+                                </select>*@
+
+                            <button class="btn btn-primary search-button">Search</button>
+
+                        </div>
+
+                    </div>
+                    <div class="container">
+                        <div class="latest_product_inner row">
+                            @foreach (var product in Model.Products)
+                            {
+                                <div class="col-lg-3 col-md-3 col-sm-6">
+                                    <div class="f_p_item">
+                                        <div class="f_p_img">
+                                            <a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@product.Id" asp-route-catid="@product.CategoryMarka.Category.Id" title="Go To Detail">
+                                                <img class="img-fluid" src="~/img/@product.Images.FirstOrDefault().PathImage" alt="Go To Detail">
+                                            </a>
+                                           
+                                            @*<div class="p_icon">
+            <a>
+                <i class="lnr lnr-heart"></i>
+            </a>
+            <a class="addcard">
+                <i class="lnr lnr-cart"></i>
+            </a>
+        </div>*@
+                                        </div>
+                                        <a href="#">
+                                            <h4 style="
+                                             font-size: 1.2rem;
+                                             font-weight: 500;
+                                             color: #777777;
+                                            ">@product.Name</h4>
+                                        </a>
+                                        @*<h5>$150.00</h5>*@
+                                        <div class="product-price">
+                                            @{
+                                                if (product.DiscountProduct != 0)
+                                                {
+                                                    <span class="now-price" style="color:#8d1010"> $@(product.Price - product.Price * product.DiscountProduct / 100) </span>
+                                                    <span class="regular-price" style="color:#777777"> $@product.Price </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="now-price" style="color:#8d1010">$@product.Price</span>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-sm d-flex justify-content-center mt-5">
+                            @for (int i = 1; i <= ViewBag.PageCount; i++)
+                            {
+                                <li class="page-item"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li>
+                            }
+
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</main>
+
+@section catshow{
+
+    <script>
+        $(document).ready(function () {
+
+
+            $(".category").change(function () {
+                let categoryId = $(this).val();
+                $.ajax({
+                    url: "/product/markas?categoryId=" + categoryId,
+                    type: "GET",
+                    success: function (res) {
+                        let first = $($(".marka")[0]);
+                        let second = $(".marka.nice-select");
+                        second.html("");
+                        first.html("");
+                        second.append(`<span class="current">${res.data[0].name}</span> <ul class="list"></ul>`);
+                        let count = 0;
+                        for (let item of res.data) {
+                            first.append(`<option value="${item.id}">${item.name}</option>`);
+
+                            if (count == 0) {
+                                second.find("ul").append(`<li data-value="${item.id}" class="option selected">${item.name}</li>`)
+                            } else {
+                                second.find("ul").append(`<li data-value="${item.id}" class="option">${item.name}</li>`)
+                            }
+
+                            count++;
+                        }
+                    }
+                })
+            });
+
+            $(".search-button").click(function () {
+
+                let category = $(".category").val();
+                let marka = $(".marka").val();
+
+                $.ajax({
+                    url: "/product/search",
+                    method: "Post",
+                    data: {
+                        categoryId: category,
+                        markaId: marka
+                    },
+                    success: function (re) {
+                        $(".latest_product_inner").html(re);
+                    }
+                })
+
+            });
+
+
+
+
+        })
+    </script>
+
+}

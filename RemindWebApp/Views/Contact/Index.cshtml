@@ -1,0 +1,76 @@
+﻿@model  EmailViewModel
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<main>  
+
+    <section id="contact_body">
+        <div class="container">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6"></div>
+                    <div class="col-lg-6"></div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="contact-title">Get in Touch</h2>
+                    </div>
+                    <div class="col-lg-8">
+                        @*@using (Html.BeginForm("Index", "Contact", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+
+                        <form class="form-contact contact_form" asp-controlsbuler="Contact" asp-action="Index" method="post"
+                              id="contactForm" enctype="multipart/form-data">
+                            <div class="row">
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <div class="form-group">
+                                            <label asp-for="Body"></label>                                         
+                                            <textarea asp-for="Body" class="form-control w-100"  id="message" cols="30"
+                                                      rows="9" placeholder="Enter Message"></textarea>
+                                            <span asp-validation-for="Body" class="text-danger"></span>
+                                        </div>
+                              
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label asp-for="From"></label>
+                                        <input asp-for="From" class="form-control"  id="name" type="email"
+                                               placeholder="Enter your email" />
+                                        <span asp-validation-for="From" class="text-danger"></span>
+                                    </div>
+                                
+                                </div>
+                               
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label asp-for="Subject"></label>
+                                        <input asp-for="Subject" name="subject" id="subject" type="text"
+                                               placeholder="Enter Subject" />
+                                        <span asp-validation-for="Subject" class="text-danger"></span>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <button type="submit" class="button button-contactForm">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="Img/helpdesk/helpdesk.jpg" class="img-fluid">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </section>
+</main>
+

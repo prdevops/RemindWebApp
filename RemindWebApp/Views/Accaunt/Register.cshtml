@@ -1,0 +1,73 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LeyautAccaunt.cshtml";
+}
+
+<section id="registration">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset=md-1">
+                <div class="row">
+                    <div class="col-md-5 register-left">
+                        <img src="~/Img/register_icon/down1.png">
+                        <h3>Join Us</h3>
+                        <p>
+                            "On the other hand, we denounce with r ighteous indignation and dislike men
+                            pleasure of the moment, so blinded by desire, that they cannot foresee
+                        </p>
+                        <a asp-controller="home" asp-action="index"> <button type="button" class="btn btn-primary"> AnaSəhifə </button></a>
+
+                    </div>
+
+
+                    <div class="col-md-7 register-right">
+                        <h2>Register</h2>
+                        <form method="post" style="margin-top:20px">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Name"></label>
+                                <input asp-for="Name" class="form-control" autocomplete="off"/>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Surname"></label>
+                                <input asp-for="Surname" class="form-control" autocomplete="off"/>
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Username"></label>
+                                <input asp-for="Username" class="form-control" autocomplete="off"/>
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Email"></label>
+                                <input asp-for="Email" class="form-control" autocomplete="off"/>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password"></label>
+                                <input asp-for="Password" class="form-control" autocomplete="off" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ConfirmPassword"></label>
+                                <input asp-for="ConfirmPassword" class="form-control" autocomplete="off"/>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            <input type="submit" class="btn btn-success" value="Register" />
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+@section aspvalidation{
+    <partial name="_ValidationScriptsPartial" />
+}

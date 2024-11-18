@@ -1,0 +1,27 @@
+﻿@model HomeSliderBig
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Areas/RemindWebApp/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 d-flex justify-content:center ">
+            <div class="card" style="width: 30rem;">
+                <img class="card-img-top" src="~/img/@Model.ImgPath" alt="Card image cap">
+                <div class="card-body">
+
+                    <h4>Başlıq: @Model.Title</h4>
+                    <h4>Alt Başlıq: @Model.Link</h4>
+                    <h4>Keçid: @Model.Link</h4>
+                    <a asp-action="Index" class="btn btn-primary"> <i class="fas fa-arrow-left"></i> Go Back </a>
+                    <form method="post">
+                        <input type="submit" class="btn btn-danger" value="Delete" style="margin-top:40px" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

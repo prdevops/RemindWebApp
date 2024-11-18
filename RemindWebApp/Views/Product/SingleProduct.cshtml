@@ -1,0 +1,155 @@
+﻿@model DetailProductViewModel
+@{
+    ViewData["Title"] = "SingleProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section flexslider{
+    <link href="~/css/flexslider.css" rel="stylesheet" />
+}
+
+
+<main>
+    <section id="single_product">
+        <div class="container">
+            <div class="col-lg-12 col-md-12">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="flexslider">
+                            <ul class="slides">
+                                @foreach (var detailproduct in Model.DetailProduct.Images)
+                                {
+                                    <li data-thumb="/img/@detailproduct.PathImage">
+                                        <img src="~/img/@detailproduct.PathImage" />
+                                    </li>
+                                }
+
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6">
+
+                        <div class="single_content">
+                            <h2>@Model.DetailProduct.Name</h2>
+                            <hr />
+                            @*<h3>Price:<span>128 AZN </span><del>240 AZN </del></h3>*@
+                            <div class="product-price">
+                                @{
+                                    if (Model.DetailProduct.DiscountProduct != 0)
+                                    {
+                                        <span class="now-price"> $@(Model.DetailProduct.Price - Model.DetailProduct.Price * Model.DetailProduct.DiscountProduct / 100) </span>
+                                        <span class="regular-price"> $@Model.DetailProduct.Price </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="now-price">$@Model.DetailProduct.Price</span>
+                                    }
+                                }
+                            </div>
+
+                            <h4>@Model.DetailProduct.Title:</h4>
+                            <p>
+                                @Model.DetailProduct.Description
+                            </p>
+
+                            <div style="display:flex; justify-content:center">
+                                <a class="btn btn-primary addcard" style="width: 15rem;height: 2.4rem;line-height: 24px;font-weight: 600;text-align: center;" title="Add To Cart" data-id="@Model.DetailProduct.Id">Add Card</a>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!--Related Products Area Start-->
+    <div class="related-products-area pb-35">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!--Section Title 2 Start-->
+                    <div class="section-title2">
+                        <h2>Related Products</h2>
+                    </div>
+                    <!--Section Title 2 End-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="product-slider owl-carousel">
+                            @foreach (var sameproduct in Model.Products)
+                            {
+                                <div class="col-md-12">
+                                    <!--Single Product Area Start-->
+                                    <div class="single-product-area mb-40">
+                                        <div class="product-img img-full">
+                                            <a href="single-product.html">
+                                                <img class="first-img" src="~/img/@sameproduct.Images.FirstOrDefault().PathImage" alt="">
+                                            </a>
+                                            <span class="sticker">New</span>
+                                            <div class="product-action">
+                                                <ul>
+                                                    <li><a class="addcard" data-id="@sameproduct.Id" title="Add To Cart"><span class="icon_bag_alt"></span></a></li>
+                                                    <li><a class="temp" data-id="@sameproduct.Id" title="Add to Like"><span class=" icon_heart_alt "></span></a></li>
+
+                                                </ul>
+                                            </div>
+                                            <ul class="product-quickview">
+                                                <li><a  asp-controller="Product" asp-action="SingleProduct" asp-route-id="@sameproduct.Id" asp-route-catid="@sameproduct.CategoryMarka.Category.Id" title="Quick View"><span class="icon_search"></span></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product-content">
+                                            <h4><a href="single-product.html">@sameproduct.Name</a></h4>
+                                            <div class="product-price">
+                                               
+                                                @{
+                                                    if (sameproduct.DiscountProduct != 0)
+                                                    {
+                                                        <span class="now-price"> $@(sameproduct.Price - sameproduct.Price * sameproduct.DiscountProduct / 100) </span>
+
+                                                        <span class="regular-price"> $@sameproduct.Price </span>
+
+
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <span class="now-price">$@sameproduct.Price</span>
+
+
+                                                    }
+
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Single Product Area End-->
+                                </div>
+
+
+                             }
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--New Product Area End-->
+</main>
+
+@section flexjs{
+    <script src="~/js/jquery.flexslider-min.js"></script>
+    <script src="~/js/flexminijs.js"></script>
+}
+
