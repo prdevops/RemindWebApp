@@ -47,6 +47,8 @@ jobs:
       scope_path_2 : "Linux Area"
     runs-on: ubuntu-latest
     steps:
-    - name: List current folder(${{env.scope_path_1} / ${{env.scope_path_2}})
-      run: ls -lah
+      - name: List current folder
+        run: echo "Listing current folder: ${{ env.scope_path_1 }} / ${{ env.scope_path_2 }}"
+      - name: List directory contents
+        run: ls -lah
 
