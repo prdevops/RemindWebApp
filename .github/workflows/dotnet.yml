@@ -1,5 +1,8 @@
 name: .NET
-
+#GLOBAL ENVIRONMENT VARIABLES
+env:
+   APPLICATION_NAME    : "Remind_Web_App"
+   DEPLOY_PACKAGE_NAME : "REMIND-DEPLOY-VERSION-${{ github.sha }}"
 on:
   push:
     branches: [ "master" ]
@@ -29,3 +32,10 @@ jobs:
     steps:
     - name: Print message
       run: echo "Congratulations, the build was successful!"
+
+  help:
+    needs: result  # Ensures that the result job runs after the build job
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print version
+      run: echo "${{env.APPLICATION_NAME}} with version ${{env.DEPLOY_PACKAGE_NAME}}"
