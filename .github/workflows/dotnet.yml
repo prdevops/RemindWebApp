@@ -26,3 +26,9 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+  result:
+    runs-on: ubuntu-latest
+    steps:
+    - name: print message
+    - run: echo "Congratulations, the build was successful"
